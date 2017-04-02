@@ -1,8 +1,0 @@
-job_post/job_post_input.php
-で必要項目に入力すると求人の募集要項が作成されます(job_post_view.php)。
-job_post_view.phpの下部から応募フォームに遷移できます（job_post_view_form.php）。
-
-フォームで応募者が必要情報に入力して送信すると管理システムの候補者に情報が登録されます。
-
-作成された求人情報の一覧は
-apply/index.phpで公開されます。
