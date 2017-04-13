@@ -59,19 +59,21 @@ if($status==false){
       $view .='<li class="isc"><a class="btn btn-xs btn-default" href="../forinterviewee/interview_date_time_select01.php?interview_id='.$res["id"].'">仮）候補者確認画面</a></li>';//日程調整
 
     }elseif($res["stage_flg"] ==2){
-      $view .='<li class="isc"><a class="btn btn-xs btn-warning" href="interview_confirm01.php?target_interview_id='.$res["id"].'">要日程確定</a></li>';//日程調整
+      $view .='<li class="isc"><a class="btn btn-xs btn-warning" href="interview_confirm01.php?interview_id='.$res["id"].'">要日程確定</a></li>';//日程調整
     }elseif($res["stage_flg"] ==3){
-      $view .='<li class="isc"><a class="btn btn-xs btn-success" href="interview01_setting.php?interview_type_num=1&target_interviewee_id='.h($result["id"]).'">日程確定</a></li>';
+      $view .='<li class="isc"><a class="btn btn-xs btn-success" href="interview_confirm01.php?interview_id='.h($res["id"]).'&stage_flg=3">日程確定</a></li>';
       $view .='<li class="isc">'.$res["interview_date_time"].'</li>';
-      $view .='<li class="isc"><a class="btn btn-xs btn-warning href="#">結果入力</a></li>';
+      $view .='<li class="isc"><a class="btn btn-xs btn-warning" href="../result/output_data.php?interview_id='.h($res["id"]).'">結果入力</a></li>';
     }elseif($res["stage_flg"] ==4){
-          $view .='<li class="isc">'.$res["interview_date_time"].'</li>';//日程調整
-          $view .='<li class="isc">通過 2017-01-01</li>';//日程調整
+          $view .='<li class="isc">面接:'.$res["interview_date_time"].'</li>';//日程調整
+          $view .='<li class="isc">通過:'.$res["fix_time"].'</li>';//日程調整
+          $view .='<li class="isc"><a class="btn btn-xs btn-default" href="../result/output_data.php?interview_id='.h($res["id"]).'">結果変更</a></li>';//日程調整
     }elseif($res["stage_flg"] ==5){
           $view .='<li class="isc">'.$res["interview_date_time"].'</li>';//日程調整
-          $view .='<li class="isc">不合格 2017-01-01</li>';//日程調整
+          $view .='<li class="isc">不合格:'.$res["fix_time"].'</li>';//日程調整
+          $view .='<li class="isc"><a class="btn btn-xs btn-default" href="../result/output_data.php?interview_id='.h($res["id"]).'">結果変更</a></li>';//日程調整
     }elseif($res["stage_flg"] ==6){
-      $view .='<li class="isc"><a class="btn btn-xs btn-warning" href="interview01_setting.php?interview_type_num=1&target_interviewee_id='.h($result["id"]).'">日程再調整</a></li>';//通過
+      $view .='<li class="isc"><a class="btn btn-xs btn-warning" href="interview_resetting.php?interview_id='.h($res["id"]).'">日程再調整</a></li>';//通過
     }
     $view .='</ul></td>';
     $view .='</ul></td>';
@@ -97,7 +99,8 @@ if($status==false){
 
     // $view .='<td><a href="input_data.php?target_inteviewee='.h($result["id"]).'" class="btn btn-xs btn-info">評価入力</a>&nbsp;<a href="output_data.php?target_inteviewee='.h($result["id"]).'" class="btn btn-xs btn-primary">評価閲覧</a></td>';
     // $view .='<td><a href="interview_detail_select.php?target_interviewee_id='.h($result["id"]).'" class="btn btn-xs btn-info">選考設定</a>&nbsp;<a href="interviewee_detail.php?target_interviewee_id='.h($result["id"]).'&target_interviewee_name='.h($result["interviewee_name"]).'" class="btn btn-xs btn-primary">情報更新</a>&nbsp;<a href="interviewee_delete.php?target_interviewee_id='.h($result["id"]).'&target_interviewee_name='.h($result["interviewee_name"]).'" class="btn btn-xs btn-danger">削除</a></td>';
-    $view .='<td><a href="interviewee_detail.php?target_interviewee_id='.h($result["id"]).'&target_interviewee_name='.h($result["interviewee_name"]).'" class="btn btn-xs btn-primary">情報更新</a>&nbsp;<a href="interviewee_delete.php?target_interviewee_id='.h($result["id"]).'&target_interviewee_name='.h($result["interviewee_name"]).'" class="btn btn-xs btn-danger">削除</a></td>';
+    $view .='<td class="text-center"><p><a href="interviewee_detail.php?target_interviewee_id='.h($result["id"]).'&target_interviewee_name='.h($result["interviewee_name"]).'" class="btn btn-xs btn-primary">情報更新</a></p>';
+    $view .='<p><a href="interviewee_delete.php?target_interviewee_id='.h($result["id"]).'&target_interviewee_name='.h($result["interviewee_name"]).'" class="btn btn-xs btn-danger">削除</a></p></td>';
 
     $view .='</tr>';
 

@@ -10,7 +10,7 @@ login_check();
 
 $_SESSION["interview_date_time_reserves"] = $_POST["interview_date_time_reserves"];
 $interviewer_id_count = count($_SESSION["interviewer_id"]);//面接担当者の数
-$interview_type_str = inteview_type($_SESSION["interview_type_num"]);//面接のステージ
+$interview_type_str = interview_type($_SESSION["interview_type_num"]);//面接のステージ
 
 //1.  DB接続します
 $pdo = db_con();

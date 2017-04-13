@@ -4,16 +4,14 @@ include("../function/function.php");
 login_check();
 
 if(
-  !isset($_GET["job_post_id"]) || $_GET["job_post_id"]=="" ||
+  !isset($_POST["job_post_id"]) || $_POST["job_post_id"]=="" ||
   !isset($_POST["life_flg"]) || $_POST["life_flg"]==""
 ){
   exit('ParamError');
 }
 
-$job_post_id = $_GET["job_post_id"] ;
+$job_post_id = $_POST["job_post_id"];
 $life_flg = $_POST["life_flg"];
-
-
 
 $pdo = db_con();
 

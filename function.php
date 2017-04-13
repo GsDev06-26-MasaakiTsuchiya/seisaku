@@ -50,6 +50,12 @@ function skyway_key(){
   return “****************************”;
 }
 
+function url_folder_name_remove($spacer,$url){
+  $url_array = explode($spacer,$url);
+  $url_array[1] = "..".$url_array[1];
+  return $url_array[1];
+}
+
 
 //
 

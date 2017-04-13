@@ -24,7 +24,19 @@ if($status==false){
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
 
     $view .='<div class="radio text-center">';
-    $view .='<label><input type="radio" name="interview_reserve_time" id="'.$result["interview_reserve_time"].'" value="'.$result["interview_reserve_time"].'">'.$result["interview_reserve_time"].'</label>';
+
+    //今日の日付の翌日の日付を取得
+    $tomorrow = date('Y-m-d', strtotime('+1 day'));
+    //interview_reserve_timeを日付と時間に分割
+    $interview_reserve_date_and_time_array = explode(" ",$result["interview_reserve_time"]);
+    //interview_reserve_timeの日付と今日の翌日の日付を比較
+    if($tomorrow < $interview_reserve_date_and_time_array[0]){
+      //interview_reserve_timeのほうがおおきければ、選択可能
+      //そうでなければ選択不可
+      $view .='<label><input type="radio" name="interview_reserve_time" id="'.$result["interview_reserve_time"].'" value="'.$result["interview_reserve_time"].'">'.$result["interview_reserve_time"].'</label>';
+    }else{
+      $view .='<label class="unselectable"><input type="radio" name="interview_reserve_time" id="'.$result["interview_reserve_time"].'" value="'.$result["interview_reserve_time"].'" disabled="disabled">'.$result["interview_reserve_time"].'</label>';
+    }
     $view .='</div>';
   }
 }
@@ -48,6 +60,9 @@ font-size:0.9em;
   color:#aaa;
 }
 
+.unselectable{
+  text-decoration: line-through;
+}
 </style>
 
 
@@ -57,15 +72,15 @@ font-size:0.9em;
 <?php include("../template/nav_for_interviewee.php") ?>
 <div class="container-fruid">
   <div class="row">
-      <div class="col-xs-2 hidden-xs"></div>
+      <div class="col-xs-2"></div>
       <h4 class="col-xs-2 pg text-center gray">1,規約同意</h4><h4 class="col-xs-2 pg text-center gray">2,動作検証</h4><h4 class="col-xs-2 pg text-center">3,面接日時選択</h4><h4 class=" col-xs-2 pg text-center gray">4,返信完了
       </h4>
-      <div class="col-xs-2 hidden-xs"></div>
+      <div class="col-xs-2"></div>
   </div>
 </div>
 <div class="container-fruid">
   <div class="row">
-    <div class="col-xs-2 hidden-xs"></div>
+    <div class="col-xs-2"></div>
     <div class="col-xs-8">
     <h3 class="text-center">面接日時選択</h3>
     <p  class="text-center">
@@ -73,7 +88,7 @@ font-size:0.9em;
   </p>
     <div class="row" id="streams" style="display:none;">
     </div>
-    <div class="col-xs-2 hidden-xs"></div>
+    <div class="col-xs-2"></div>
   </div>
 </div>
 
@@ -96,6 +111,7 @@ font-size:0.9em;
     <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
+        <p class="text-center">※過去、当日、翌日の日時は選択できません。</p>
         <p class="text-center">※対応可能な日時がない場合、ビデオ面接で対応できない場合は<a href="interview_reset.php">こちら</a>からご連絡ください。</p>
       </div>
       <div class="col-sm-2"></div>

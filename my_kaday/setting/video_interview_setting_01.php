@@ -6,7 +6,7 @@ login_check();
 $_SESSION["interviewee_id"] = $_GET["target_interviewee_id"];
 $_SESSION["interview_type_num"] = $_GET["interview_type_num"];
 
-$interview_type_str = inteview_type($_SESSION["interview_type_num"]);
+$interview_type_str = interview_type($_SESSION["interview_type_num"]);
 
 //1.  DB接続します
 $pdo = db_con();

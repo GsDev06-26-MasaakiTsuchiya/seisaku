@@ -117,6 +117,7 @@ $(function(){
     var target_id = this.id;
     console.log(target_id);
     if($(this).hasClass('close')){
+      $(this).removeClass('btn-success close').addClass('btn-warning open').text('').text('休止中');
       $.ajax({
         type:"post",
         url: "stop_start.php?job_post_id=".target_id,
@@ -127,8 +128,9 @@ $(function(){
           console.log("closing");
           }
         });
-          $(this).removeClass('btn-success close').addClass('btn-warning open').text('').text('休止中');
+
     }else if($(this).hasClass('open')){
+        $(this).removeClass('btn-warning open').addClass('btn-success close').text('').text('掲載中');
         $.ajax({
           type:"post",
           url: "stop_start.php?job_post_id=".target_id,
@@ -139,7 +141,7 @@ $(function(){
             console.log("openning");
           }
         });
-        $(this).removeClass('btn-warning open').addClass('btn-success close').text('').text('掲載中');
+
       }
     });
   });

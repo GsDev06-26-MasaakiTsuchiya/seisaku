@@ -23,6 +23,7 @@
             <li><a href="../job_post/job_post_select.php">求人管理</a></li>
             <li><a href="../apply/apply_index_input.php">求人サイト作成</a></li>
             <li><a href="../apply/index.php">求人サイト確認</a></li>
+            <li><a href="../corp_info/index.php">候補者向け会社情報</a></li>
 					</ul>
 				</li>
                 ';

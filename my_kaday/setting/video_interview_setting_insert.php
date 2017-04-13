@@ -4,8 +4,9 @@ session_start();
 include("../function/function.php");
 login_check();
 
+
 //1. POSTデータ取得 from video_interview_setting_03
-$toSubmit = $_POST["toSubmit"];
+$toSubmit = $_POST["toSubmit_address"];
 $mail_text = $_POST["mail_text"];
 
 
@@ -43,7 +44,7 @@ $stmt = $pdo->prepare("INSERT INTO interview_reserve_time(id, interview_id, inte
 $stmt->bindParam(':interview_id', $interview_id, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
 foreach($_SESSION["interview_date_time_reserves"] as $interview_reserve_time){
   $stmt->bindValue(':interview_reserve_time', $interview_reserve_time, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
-  $status2 = $stmt->execute();
+  $status3 = $stmt->execute();
 }
 
 $pdo->commit();
@@ -56,12 +57,17 @@ $pdo->commit();
 if($status==false){
     //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
     $error = $stmt->errorInfo();
-    exit("QueryError:".$error[2]);
+    exit("QueryError1:".$error[2]);
 }
 if($status2==false){
     //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
     $error = $stmt->errorInfo();
-    exit("QueryError:".$error[2]);
+    exit("QueryError2:".$error[2]);
+}
+if($status3==false){
+    //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
+    $error = $stmt->errorInfo();
+    exit("QueryError3:".$error[2]);
 }
 
 header("Location: interviewee_select.php");//location: のあとに必ずスペースが入る

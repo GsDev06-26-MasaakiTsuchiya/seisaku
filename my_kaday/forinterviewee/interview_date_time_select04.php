@@ -54,31 +54,30 @@ font-size:0.9em;
 <?php include("../template/nav_for_interviewee.php") ?>
 <div class="container-fruid">
   <div class="row">
-      <div class="col-xs-2 hidden-xs"></div>
+      <div class="col-xs-2"></div>
       <h4 class="col-xs-2 pg text-center gray">1,規約同意</h4><h4 class="col-xs-2 pg text-center gray">2,動作検証</h4><h4 class="col-xs-2 pg text-center gray">3,面接日時選択</h4><h4 class=" col-xs-2 pg text-center">4,返信完了
       </h4>
-      <div class="col-xs-2 hidden-xs"></div>
+      <div class="col-xs-2"></div>
   </div>
 </div>
 <div class="container-fruid">
   <div class="row">
-    <div class="col-xs-2 hidden-xs"></div>
+    <div class="col-xs-2"></div>
     <div class="col-xs-8">
     <h3 class="text-center">返信完了</h3>
     <!-- <h4 class="text-center"><?= $view ?>様</h4> -->
     <p>ご確認ありがとうございました。
 まだ、面接日時は確定していません。<br>面接担当者が面接日時を確認するまでしばらくお待ち下さい
 面接日時が確定しましたらあらためてご案内をお送りしますので必ずご確認くださいますようお願い致します。</p>
-    <div class="row" id="streams" style="display:none;">
     </div>
-    <div class="col-xs-2 hidden-xs"></div>
+    <div class="col-xs-2"></div>
   </div>
 </div>
 
 
 
 
-
+<a href="../setting/interviewee_select.php">動作確認用　interviewee_selectにもどる</a>
 
 <?php include("../template/footer_for_interviewee.html") ?>
 
