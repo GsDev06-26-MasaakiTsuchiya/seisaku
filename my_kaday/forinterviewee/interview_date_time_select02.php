@@ -6,12 +6,13 @@ session_start();
 include("../function/function.php");
 
 
-
+$skyway_key = skyway_key();
 ?>
 
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>interview_rader_chart > input</title>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -58,9 +59,10 @@ font-size:0.9em;
     <p>
     test
   </p>
-    <div class="row" id="streams" style="display:none;">
+    <div class="row" id="self_video">
     </div>
-    <div class="col-xs-2 hidden-xs"></div>
+    <div class="text-center" id="result"></div>
+    <div class="text-center"><button class="btn btn-info btn-lg" id="test_start">動作検証</button></div>
   </div>
 </div>
   <div class="container-fruid">
@@ -89,32 +91,32 @@ font-size:0.9em;
   	});
   });
 
-  // MultiParty インスタンスを生成
-//   multiparty = new MultiParty( {
-//     "key": "68ea836f-c243-4b68-b5c9-ee68fcf48c97", /* SkyWay keyを指定 */
-//     "reliable": true
-//   });
-//
-//   multiparty.on('my_ms', function(video) {
-//   // 自分のvideoを表示
-//   var vNode = MultiParty.util.createVideoNode(video);
-//   vNode.volume = 0;
-//
-//   $(vNode).appendTo("#streams");
-// }).on('peer_ms', function(video) {
-//   // peerのvideoを表示
-//   var vNode = MultiParty.util.createVideoNode(video);
-//   $(vNode).appendTo("#streams");
-// }).on('ms_close', function(peer_id) {
-//   // peerが切れたら、対象のvideoノードを削除する
-//   $("#"+peer_id).remove();
-// });
-//
-//   // サーバとpeerに接続
-//   multiparty.start()
-//
-//
-// }
+  //MultiParty インスタンスを生成
+  multiparty = new MultiParty( {
+    "key": "<?= $skyway_key ?>", /* SkyWay keyを指定 */
+    "reliable": true
+  });
+
+  multiparty.on('my_ms', function(video) {
+  // 自分のvideoを表示
+  var vNode = MultiParty.util.createVideoNode(video);
+  vNode.volume = 0;
+  $(vNode).appendTo('#self_video');
+    if($('#self_video').length){
+      $('#result').html('<span style="color:Blue;">OK</span>');
+    }else{
+      $('#result').html('<span style="color:red;">NG</span>');
+
+    }
+  }
+
+  // サーバとpeerに接続
+  $('#test_start').on('click',function(){
+    multiparty.start();
+  });
+
+
+}
 
 </script>
 </body>

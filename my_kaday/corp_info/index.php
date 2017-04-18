@@ -28,6 +28,7 @@ $pdf_url_for_iframe = url_folder_name_remove("pdfjs",$res_corp_info["up_pdf"]);
 <head>
 <meta charset="utf-8">
 <title>interview_rader_chart > input</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/16c63c33a4.js"></script>
@@ -81,6 +82,11 @@ div.item_s{
 
 <div class="container-fruid">
   <div class="row content_item">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10 text-right"><a href="detail.php" class="btn btn-default">編集する</a></div>
+      <div class="col-sm-1"></div>
+    </div>
     <h2 class="text-center title" id="info_top">会社情報</h2>
     <div class="col-sm-1"></div>
     <div class="col-sm-10">

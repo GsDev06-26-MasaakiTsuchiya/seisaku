@@ -75,6 +75,7 @@ if($status3==false){
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>interview_rader_chart > result </title>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
@@ -118,7 +119,9 @@ if($status3==false){
 <div class="info_name">
 <p class="text-center"><?= h($res["interviewee_name_kana"])?></p>
 <h2 class="text-center"><?= h($res["interviewee_name"])?></h2>
-<p class="text-center"><a href="web_interview.php?interview_id=<?=$interview_id?>" target="_blank">ビデオ面接</a></p>
+<p class="text-center">
+  <!-- <a class="btn btn-info" href="web_interview.php?interview_id=<?=$interview_id?>" target="_blank">ビデオ面接</a></p> -->
+  <!-- <button class="btn btn-info" id="web_interview_open">ウェブ面接</button> -->
 </div>
 <div class="container">
   <div class="row">
@@ -235,6 +238,19 @@ var myChart = new Chart(ctx, {
   }
 
 });
+
+// $(function(){
+// // var openedWindow;
+// // //
+// // function openWindow() {
+// //   openedWindow = window.open("web_intervivew0.php?interview_id=<?= $interview_id ?>");
+// // }
+// //
+// $('web_interview_open').click(function(){
+//   window.open('web_interview0.php?interview_id=<?= $interview_id ?>');
+//   return false;
+// });
+// });
 
 </script>
 
