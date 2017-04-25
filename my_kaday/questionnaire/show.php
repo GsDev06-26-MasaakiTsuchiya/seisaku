@@ -73,17 +73,17 @@ $stmt = $pdo->prepare("SELECT * FROM form INNER JOIN form_item ON form.form_id =
     $form_item_view .= '</div>';//form-contorl
  }
  }
-  $stmt_title = $pdo->prepare("SELECT * FROM form WHERE form.form_id = :form_id");
-  $stmt_title->bindValue(':form_id', $form_id, PDO::PARAM_INT);
-  $status_title = $stmt_title->execute();
+$stmt_title = $pdo->prepare("SELECT * FROM form WHERE form_id = :form_id");
+$stmt_title->bindValue(':form_id', $form_id, PDO::PARAM_INT);
+$status_title = $stmt_title->execute();
 
-  if($status_title==false){
-    //execute（SQL実行時にエラーがある場合）
-    $error = $stmt_title->errorInfo();
-    exit("ErrorQuery_title:".$error[2]);
-  }else{
-    $res_title = $stmt_title->fetch();
-  }
+if($status_title==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_title->errorInfo();
+  exit("ErrorQuery_title:".$error[2]);
+}else{
+  $res_title = $stmt_title->fetch();
+}
 
 ?>
 
@@ -109,13 +109,17 @@ $stmt = $pdo->prepare("SELECT * FROM form INNER JOIN form_item ON form.form_id =
 <div class="container">
   <h2 class="text-center"><?= $res_title["form_name"] ?></h2>
   <p class="text-center"><?= $res_title["form_description"] ?></p>
+
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
+      <div class="text-right">
+        <a class="btn btn-primary" href="detail.php?form_id=<?=$form_id?>">編集</a>
+      </div>
       <form class="form-horizontal" method="post" action="test_input_data_insert.php">
         <?= $form_item_view ?>
       <div class="text-center">
-        <input type="submit" class="btn btn-info" value="送信">
+        <input type="submit" class="btn btn-info" value="送信" disabled>
       </div>
       </form>
     </div>

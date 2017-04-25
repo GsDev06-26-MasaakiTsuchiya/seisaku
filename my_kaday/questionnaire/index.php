@@ -26,7 +26,7 @@ if($status_form==false){
     $view_form_item .= $result_form["form_description"];
     $view_form_item .= '</td>';
     $view_form_item .= '<td>';
-    $view_form_item .= '<a type="button" href="show.php?form_id='.$result_form["form_id"].'"class="btn btn-sm btn-primary">確認</a> <button class="btn btn-sm btn-danger">削除</button>';
+    $view_form_item .= '<a type="button" href="show.php?form_id='.$result_form["form_id"].'"class="btn btn-sm btn-primary">確認・修正</a> <button class="btn btn-sm btn-danger" disabled>削除</button>';
     $view_form_item .= '</td>';
     $view_form_item .= '</tr>';
   }
