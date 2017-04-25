@@ -39,6 +39,20 @@ if($status2==false){
   $res_job_post= $stmt2->fetch();
 }
 
+//アンケート結果があれば表示する
+$stmt_anchet = $pdo->prepare("SELECT * FROM anchet WHERE interviewee_id = :interviewee_id AND stage_flg= :stage_flg");
+$stmt_anchet->bindValue(':interviewee_id',$interviewee_id, PDO::PARAM_INT);
+$stmt_anchet->bindValue(':stage_flg',2, PDO::PARAM_INT);//2= 回答済み
+
+$status_anchet = $stmt_anchet->execute();
+if($status_anchet==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_anchet->errorInfo();
+  exit("ErrorQuery_anchet:".$error[2]);
+}else{
+  $res_anchet = $stmt_anchet->fetch();
+}
+
 ?>
 
 
@@ -99,6 +113,9 @@ label#inteviewer{
         <tr><th class="text-center">職種</th><td class="text-center"><?=h($res_job_post["job_title"])?></td></tr>
         <tr><th class="text-center">選考ステージ</th><td class="text-center"><?=$interview_type[h($res["interview_type"])]?></td></tr>
         <tr><th class="text-center">面接日時</th><td class="text-center"><?=h($res["interview_date_time"])?></td></tr>
+        <?php if($res_anchet["anchet_id"]):?>
+        <tr><th class="text-center">アンケート</th><td class="text-center"><a class="btn btn-default" href="../setting/questionnaire_show.php?anchet_id=<?= $res_anchet["anchet_id"]?>">アンケート結果</a></td></tr>
+        <?php endif;?>
       </table>
     </div>
     <div class="col-sm-1"></div>

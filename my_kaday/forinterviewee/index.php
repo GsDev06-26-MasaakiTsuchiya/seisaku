@@ -85,6 +85,23 @@ if($status_interview==false){
     $view_interview .= '</div>';//row
   }
 }
+//anchet情報の出力
+
+$stmt_anchet = $pdo->prepare("SELECT * FROM anchet WHERE interviewee_id = :interviewee_id ");
+$stmt_anchet->bindValue(':interviewee_id',$_SESSION["interviewee_id"],PDO::PARAM_INT);
+$status_anchet = $stmt_anchet->execute();
+
+if($status_anchet==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_anchet->errorInfo();
+  exit("ErrorQuery_anchet:".$error[2]);
+}else{
+  $res_anchet= $stmt_anchet->fetch();
+}
+
+
+
+//会社情報の出力
 
 $stmt = $pdo->prepare("SELECT * FROM corp_info");
 $status_corp_info = $stmt->execute();
@@ -172,6 +189,37 @@ div.item_s{
      </div> <!-- /.modal-content -->
    </div> <!-- /.modal-dialog -->
 </div> <!-- /.modal -->
+<?php if($res_anchet["stage_flg"]==1):?>
+<div class="container interview_info_all">
+  <h2 class="text-center title">アンケート</h2>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <div class="text-center">
+    <p>アンケートに入力してください。</p>
+    <div>返信期限:<span style="color:red;"><?= $res_anchet["deadline"] ?></span></div>
+      <a class="btn btn-info" href="reply_anchet.php?anchet_id=<?=$res_anchet["anchet_id"]?>">アンケートに入力する</a>
+      </div>
+    </div>
+  <div class="col-sm-1"></div>
+  </div>
+</div>
+<?php elseif($res_anchet["stage_flg"]==2):?>
+  <div class="container interview_info_all">
+    <h2 class="text-center title">アンケート</h2>
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-10">
+        <div class="text-center">
+          <p><?= $res_anchet["recieved_date"] ?>に返信済みです。</p>
+          <a class="btn btn-default" href="reply_show.php?anchet_id=<?=$res_anchet["anchet_id"]?>" target="_blank">返信済みアンケートを確認する。</a>
+        </div>
+      </div>
+    <div class="col-sm-1"></div>
+    </div>
+  </div>
+<?php endif ?>
+
 
 <div class="container-fruid">
   <div class="row content_item">

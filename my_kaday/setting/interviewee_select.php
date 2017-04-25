@@ -33,7 +33,30 @@ if($status==false){
     $view .='<li class="isc">中途</li>';
     $view .='<li class="isc">'.h($result["indate"]).'</li>';
     $view .='</ul></td>';
-    $view .='<td><a class="btn btn-xs btn-default" href="#">未送信</a></td>';
+      //アンケート情報の検索
+      $stmt_anchet = $pdo->prepare("SELECT * FROM anchet WHERE interviewee_id = :interviewee_id");
+      $stmt_anchet->bindValue(':interviewee_id', $result["id"], PDO::PARAM_INT);
+      $status_anchet = $stmt_anchet->execute();
+      if($status_anchet==false){
+        //execute（SQL実行時にエラーがある場合）
+        $error = $stmt_anchet->errorInfo();
+        exit("ErrorQuery_anchet:".$error[2]);
+      }else{
+        $res_anchet = $stmt_anchet->fetch();
+      }
+    $view .='<td><ul class="list-unstyled">';
+    if(!$res_anchet["stage_flg"]){//アンケート未送信のとき
+      $view .='<li class="isc"><a class="btn btn-xs btn-default" href="questionnaire_setting01.php?target_interviewee_id='.$result["id"].'">未送信</a></li>';
+    }elseif($res_anchet["stage_flg"]==1){//返信まち
+      $view .='<li class="isc"><a class="btn btn-xs btn-warning" href="">回答待</a></li>';
+      $view .='<li class="isc">送信:'.$res_anchet["send_date"].'</li>';
+      $view .='<li class="isc">返信期限:'.$res_anchet["deadline"].'</li>';
+      $view .='<li class="isc"><a class="btn btn-xs btn-default" href="../forinterviewee/reply_anchet.php?anchet_id='.$res_anchet["anchet_id"].'">（仮）候補者回答画面へ</a></li>';
+    }elseif($res_anchet["stage_flg"]==2){//受信完了
+      $view .='<li class="isc"><a class="btn btn-xs btn-success" href="questionnaire_show.php?anchet_id='.$res_anchet["anchet_id"].'">回答済</a></li>';
+      $view .='<li class="isc">回答:'.$res_anchet["recieved_date"].'</li>';
+    }
+    $view .='</ul></td>';//アンケート終了
     $view .='<td><ul class="list-unstyled">';//書類選考
     $view .='<li class="isc">2017-01-12</li>';
     $view .='<li class="isc">2017-01-20</li>';
@@ -42,7 +65,6 @@ if($status==false){
       $stmt2 = $pdo->prepare("SELECT * FROM interview WHERE interviewee_id = :interviewee_id AND interview_type = :interview_type");
       $stmt2->bindValue(':interviewee_id', $result["id"], PDO::PARAM_INT);
       $stmt2->bindValue(':interview_type', 1, PDO::PARAM_INT);
-
       $status2 = $stmt2->execute();
       if($status==false){
         //execute（SQL実行時にエラーがある場合）

@@ -14,7 +14,7 @@
 <div class="collapse navbar-collapse target">
   <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-					<a href="#interview_item" role="button">面接情報</a>
+					<a href="index.php#interview_item" role="button">面接情報</a>
 					<!-- <ul class="dropdown-menu" role="menu">
 						<li><a href="../setting/interviewee_select.php">候補者新規登録</a></li>
 						<li><a href="../setting/interviewer_select.php">面接者登録</a></li>
