@@ -4,18 +4,12 @@ include("../function/function.php");
 login_check();
 //1.  DB接続します
 
+$html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
 ?>
-
-
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>interview_rader_chart > input</title>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/common.css">
+<?php include("../template/head.php") ?>
 <style>
 .remove{
   font-size:1.2em;
@@ -168,14 +162,14 @@ login_check();
 <script>
 $(function(){
   var id_num = 4;
-  var form_id = 'form_' + id_num;
   //text_area 追加
   $('#add_textarea').click(function(){
+     var form_id = 'form_' + id_num;
      var textarea_original = '';
      textarea_original += '<div class="row">';
      textarea_original += '<div class="col-xs-11">';
      textarea_original += '<div class="form-group" id=' + form_id + '">';
-     textarea_original += '<label class="control-label" for="questions[' + form_id + '">質問:</label>';
+     textarea_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      textarea_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）なぜ弊社の求人に興味をもっていただいたのでしょうか"></textarea>';
      textarea_original += '<label class="control-label" for="answer[' + form_id + '][]">回答欄:</label>';
      textarea_original += '<textarea class="form-control" name="answer['+ form_id + '][]" disabled></textarea>';
@@ -189,23 +183,27 @@ $(function(){
 
      console.log(textarea_original);
      $('#myform').append(textarea_original);
+     console.log(id_num);
+     console.log(form_id);
      id_num++;
+
   });
   //checkboxエリア追加
   $('#add_checkbox').click(function(){
+     var form_id = 'form_' + id_num;
      var checkbox_original = '';
      checkbox_original += '<div class="row">';
      checkbox_original += '<div class="col-xs-11">';
      checkbox_original += '<div class="form-group" id=' + form_id + '">';
-     checkbox_original += '<label class="control-label" for="questions[' + form_id + '">質問:</label>';
+     checkbox_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      checkbox_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）あなたの得意な科目はなんですか？複数選択可"></textarea>';
      checkbox_original += '<div class="text-right">';
      checkbox_original += '<span class="add_checkbox_item"><i class="glyphicon glyphicon-plus"></i></span>';
      checkbox_original += '</div>';//text-right
      checkbox_original += '<div class="checkbox_area">';
-     checkbox_original += '<label class="checkbox-inline"><input type="checkbox" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + 'form_id' + '][]"> <span class="remove_item"><i class="glyphicon glyphicon-remove-circle"></i></span></label>';
-     checkbox_original += '<label class="checkbox-inline"><input type="checkbox" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + 'form_id' + '][]"> <span class="remove_item"><i class="glyphicon glyphicon-remove-circle"></i></span></label>';
-     checkbox_original += '<label class="checkbox-inline"><input type="checkbox" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + 'form_id' + '][]"> <span class="remove_item"><i class="glyphicon glyphicon-remove-circle"></i></span></label>';
+     checkbox_original += '<label class="checkbox-inline"><input type="checkbox" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + form_id + '][]"> <span class="remove_item"><i class="glyphicon glyphicon-remove-circle"></i></span></label>';
+     checkbox_original += '<label class="checkbox-inline"><input type="checkbox" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + form_id + '][]"> <span class="remove_item"><i class="glyphicon glyphicon-remove-circle"></i></span></label>';
+     checkbox_original += '<label class="checkbox-inline"><input type="checkbox" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + form_id + '][]"> <span class="remove_item"><i class="glyphicon glyphicon-remove-circle"></i></span></label>';
      checkbox_original += '</div>';//checkbox_area
      checkbox_original += '<input type=hidden name="form_types[' + form_id + ']" value="checkbox">';
      checkbox_original += '</div>';//form-group
@@ -215,25 +213,30 @@ $(function(){
      checkbox_original += '</div>';//col-xs-1
      checkbox_original += '</div>';//row
 
-     console.log(checkbox_original);
+    //  console.log(checkbox_original);
      $('#myform').append(checkbox_original);
+     console.log(id_num);
+     console.log(form_id);
      id_num++;
+
+
   });
 
   $('#add_radio').click(function(){
+     var form_id = 'form_' + id_num;
      var radio_original = '';
      radio_original += '<div class="row">';
      radio_original += '<div class="col-xs-11">';
      radio_original += '<div class="form-group" id=' + form_id + '">';
-     radio_original += '<label class="control-label" for="questions[' + form_id + '">質問:</label>';
+     radio_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      radio_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）あなたの得意な科目はなんですか？複数選択可"></textarea>';
      radio_original += '<div class="text-right">';
      radio_original += '<span class="add_radio_item"><i class="glyphicon glyphicon-plus"></i></span>';
      radio_original += '</div>';//text-right
      radio_original += '<div class="radio_area">';
-     radio_original += '<label class="radio-inline"><input type="radio" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + 'form_id' + '][]"><span class="remove_item"> <i class="glyphicon glyphicon-remove-circle"></i></span></label>';
-     radio_original += '<label class="radio-inline"><input type="radio" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + 'form_id' + '][]"><span class="remove_item"> <i class="glyphicon glyphicon-remove-circle"></i></span></label>';
-     radio_original += '<label class="radio-inline"><input type="radio" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + 'form_id' + '][]"><span class="remove_item"> <i class="glyphicon glyphicon-remove-circle"></i></span></label>';
+     radio_original += '<label class="radio-inline"><input type="radio" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + form_id + '][]"><span class="remove_item"> <i class="glyphicon glyphicon-remove-circle"></i></span></label>';
+     radio_original += '<label class="radio-inline"><input type="radio" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + form_id + '][]"><span class="remove_item"> <i class="glyphicon glyphicon-remove-circle"></i></span></label>';
+     radio_original += '<label class="radio-inline"><input type="radio" name="answer['+ form_id + '][]" disabled><input type="text" name="select_items[' + form_id + '][]"><span class="remove_item"> <i class="glyphicon glyphicon-remove-circle"></i></span></label>';
      radio_original += '</div>';//radio_area
      radio_original += '<input type=hidden name="form_types[' + form_id + ']" value="radio">';
      radio_original += '</div>';//form-group
@@ -245,6 +248,8 @@ $(function(){
 
      console.log(radio_original);
      $('#myform').append(radio_original);
+     console.log(id_num);
+     console.log(form_id);
      id_num++;
   });
 

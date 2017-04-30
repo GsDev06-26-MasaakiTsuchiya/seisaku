@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cabin+Condensed&text=SmartInterview">
 <script src="https://use.fontawesome.com/16c63c33a4.js"></script>
-<nav class="navbar navbar-default navbar-inverse navbar-static-top">
+<nav class="navbar navbar-default navbar-fixed-top">
 <div class="navbar-header">
   <button class="navbar-toggle" data-toggle="collapse" data-target=".target">
     <span class="icon-bar"></span>
@@ -15,7 +15,7 @@
   <ul class="nav navbar-nav navbar-right">
       <?php if(isset($_SESSION["kanri_flg"]) AND $_SESSION["kanri_flg"] == 1){
           echo '
-                <li class="dropdown active">
+                <li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Setting<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="../setting/interviewee_select.php">候補者一覧・登録</a></li>

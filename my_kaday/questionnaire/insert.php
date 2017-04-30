@@ -11,21 +11,22 @@ $questions =  $_POST["questions"];
 // $answer =  $_POST["answer"];
 $form_types = $_POST["form_types"];
 $select_items = $_POST["select_items"];
-echo('<pre>');
-var_dump($questions);
-// var_dump($answer);
-var_dump($form_types);
-var_dump($select_items);
-echo('</pre>');
-// exit();
-
+// echo('<pre>');
+// var_dump($questions);
+// // var_dump($answer);
+// var_dump($form_types);
+// var_dump($select_items);
+// echo('</pre>');
+// exit;
 $pdo = db_con();
 
+
 //form テーブルに情報登録
-$stmt_form = $pdo->prepare("INSERT INTO form(form_id,form_name,form_description
-)VALUES(NULL,:form_name,:form_description)");
+$stmt_form = $pdo->prepare("INSERT INTO form(form_id,form_name,form_description,life_flg
+)VALUES(NULL,:form_name,:form_description,:life_flg)");
 $stmt_form->bindValue(':form_name', $form_name, PDO::PARAM_STR);
 $stmt_form->bindValue(':form_description', $form_description, PDO::PARAM_STR);
+$stmt_form->bindValue(':life_flg', 1, PDO::PARAM_STR);
 $status_form = $stmt_form->execute();
 
   if($status_form ==false){

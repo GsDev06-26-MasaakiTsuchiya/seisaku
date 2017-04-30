@@ -20,7 +20,7 @@ if($status_form_title==false){
 
 
 //フォームの中身を出力
-$stmt_form = $pdo->prepare("SELECT * FROM form INNER JOIN form_item ON form.form_id = form_item.form_id WHERE form.form_id = :form_id");
+$stmt_form = $pdo->prepare("SELECT * FROM form_item WHERE form_id = :form_id ORDER BY form_order ASC");
 $stmt_form->bindValue(':form_id', $form_id, PDO::PARAM_INT);
 $status_form = $stmt_form->execute();
 
@@ -32,13 +32,19 @@ if($status_form==false){
 
 }else{
  //Selectデータの数だけ自動でループしてくれる
- while( $result_form_item = $stmt_form->fetch(PDO::FETCH_ASSOC)){
+ while($result_form_item = $stmt_form->fetch(PDO::FETCH_ASSOC)){
+//    echo ('<pre>');
+//    var_dump($result_form_item);
+//    echo ('</pre>');
+//
+//  }
+// }
    if($result_form_item["form_type"] == "textarea"){
     $form_id_element = 'form_'.$result_form_item["form_order"];
     $form_item_view .= '<div class="row">';
     $form_item_view .= '<div class="col-xs-11">';
-    $form_item_view .= '<div class="form-group" id='.$form_id_element.'">';
-    $form_item_view .= '<label class="control-label" for="questions['.$form_id_element.'">質問:</label>';
+    $form_item_view .= '<div class="form-group" id="'.$form_id_element.'">';
+    $form_item_view .= '<label class="control-label" for="questions['.$form_id_element.']">質問:</label>';
     $form_item_view .= '<textarea class="form-control" name="questions['.$form_id_element.']" placeholder="質問文を入力してください。　　例）なぜ弊社の求人に興味をもっていただいたのでしょうか">'.$result_form_item["question"].'</textarea>';
     $form_item_view .= '<label class="control-label" for="answer['.$form_id_element.'][]">回答欄:</label>';
     $form_item_view .= '<textarea class="form-control" name="answer['.$form_id_element.'][]" disabled></textarea>';
@@ -49,13 +55,13 @@ if($status_form==false){
     $form_item_view .= '<span class="remove"><i class="glyphicon glyphicon-trash"></i></span>';
     $form_item_view .= '</div>';//col-xs-1
     $form_item_view .= '</div>';//row
-  }
-  if($result_form_item["form_type"] == "checkbox"){
+  }else if($result_form_item["form_type"] == "checkbox"){
+    // echo 'checkbox';
     $form_id_element = 'form_'.$result_form_item["form_order"];
-    $form_item_view = '<div class="row">';
+    $form_item_view .= '<div class="row">';
     $form_item_view .= '<div class="col-xs-11">';
-    $form_item_view .= '<div class="form-group" id='.$form_id_element.'">';
-    $form_item_view .= '<label class="control-label" for="questions['.$form_id_element.'">質問:</label>';
+    $form_item_view .= '<div class="form-group" id="'.$form_id_element.'">';
+    $form_item_view .= '<label class="control-label" for="questions['.$form_id_element.']">質問:</label>';
     $form_item_view .= '<textarea class="form-control" name="questions['.$form_id_element.']" placeholder="質問文を入力してください。　　例）あなたの得意な科目はなんですか？複数選択可">'.$result_form_item["question"].'</textarea>';
     $form_item_view .= '<div class="text-right">';
     $form_item_view .= '<span class="add_checkbox_item"><i class="glyphicon glyphicon-plus"></i></span>';
@@ -87,13 +93,13 @@ if($status_form==false){
     $form_item_view .= '<span class="remove"><i class="glyphicon glyphicon-trash"></i></span>';
     $form_item_view .= '</div>';//col-xs-1
     $form_item_view .= '</div>';//row
-  }
-  if($result_form_item["form_type"] == "radio"){
+  }else if($result_form_item["form_type"] == "radio"){
+    // echo 'radio ';
     $form_id_element = 'form_'.$result_form_item["form_order"];
     $form_item_view .= '<div class="row">';
     $form_item_view .= '<div class="col-xs-11">';
-    $form_item_view .= '<div class="form-group" id='.$form_id_element.'">';
-    $form_item_view .= '<label class="control-label" for="questions['.$form_id_element.'">質問:</label>';
+    $form_item_view .= '<div class="form-group" id="'.$form_id_element.'">';
+    $form_item_view .= '<label class="control-label" for="questions['.$form_id_element.']">質問:</label>';
     $form_item_view .= '<textarea class="form-control" name="questions['.$form_id_element.']" placeholder="質問文を入力してください。　　例）あなたの血液型はなんですか？">'.$result_form_item["question"].'</textarea>';
     $form_item_view .= '<div class="text-right">';
     $form_item_view .= '<span class="add_radio_item"><i class="glyphicon glyphicon-plus"></i></span>';
@@ -123,24 +129,18 @@ if($status_form==false){
     $form_item_view .= '<span class="remove"><i class="glyphicon glyphicon-trash"></i></span>';
     $form_item_view .= '</div>';//col-xs-1
     $form_item_view .= '</div>';//row
-  }
+}
 
 
  }
 }
 
+$html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
 ?>
-
-
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>interview_rader_chart > input</title>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/common.css">
+<?php include("../template/head.php") ?>
 <style>
 .remove{
   font-size:1.2em;
@@ -196,15 +196,15 @@ if($status_form==false){
 </body>
 <script>
 $(function(){
-  var id_num = 4;
-  var form_id = 'form_' + id_num;
+  var id_num = ;
   //text_area 追加
   $('#add_textarea').click(function(){
+     var form_id = 'form_' + id_num;
      var textarea_original = '';
      textarea_original += '<div class="row">';
      textarea_original += '<div class="col-xs-11">';
-     textarea_original += '<div class="form-group" id=' + form_id + '">';
-     textarea_original += '<label class="control-label" for="questions[' + form_id + '">質問:</label>';
+     textarea_original += '<div class="form-group" id="' + form_id + '">';
+     textarea_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      textarea_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）なぜ弊社の求人に興味をもっていただいたのでしょうか"></textarea>';
      textarea_original += '<label class="control-label" for="answer[' + form_id + '][]">回答欄:</label>';
      textarea_original += '<textarea class="form-control" name="answer['+ form_id + '][]" disabled></textarea>';
@@ -218,15 +218,17 @@ $(function(){
 
      console.log(textarea_original);
      $('#myform').append(textarea_original);
+
      id_num++;
   });
   //checkboxエリア追加
   $('#add_checkbox').click(function(){
+     var form_id = 'form_' + id_num;
      var checkbox_original = '';
      checkbox_original += '<div class="row">';
      checkbox_original += '<div class="col-xs-11">';
-     checkbox_original += '<div class="form-group" id=' + form_id + '">';
-     checkbox_original += '<label class="control-label" for="questions[' + form_id + '">質問:</label>';
+     checkbox_original += '<div class="form-group" id="' + form_id + '">';
+     checkbox_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      checkbox_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）あなたの得意な科目はなんですか？複数選択可"></textarea>';
      checkbox_original += '<div class="text-right">';
      checkbox_original += '<span class="add_checkbox_item"><i class="glyphicon glyphicon-plus"></i></span>';
@@ -250,11 +252,12 @@ $(function(){
   });
 
   $('#add_radio').click(function(){
+     var form_id = 'form_' + id_num;
      var radio_original = '';
      radio_original += '<div class="row">';
      radio_original += '<div class="col-xs-11">';
-     radio_original += '<div class="form-group" id=' + form_id + '">';
-     radio_original += '<label class="control-label" for="questions[' + form_id + '">質問:</label>';
+     radio_original += '<div class="form-group" id="' + form_id + '">';
+     radio_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      radio_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）あなたの血液型はなんですか？複数選択可"></textarea>';
      radio_original += '<div class="text-right">';
      radio_original += '<span class="add_radio_item"><i class="glyphicon glyphicon-plus"></i></span>';
@@ -291,6 +294,7 @@ $(function(){
     //checkbox選択肢追加
   $(document).on('click','.add_checkbox_item',function(){
      var form_id = $(this).parents('.form-group').attr('id');
+    console.log(form_id);
      var checkbox_item = '';
          checkbox_item += '<label class="checkbox-inline">';
          checkbox_item += '<input type="checkbox" name="answer[' + form_id + '][]" disabled>';
@@ -303,6 +307,7 @@ $(function(){
     //radio選択肢
   $(document).on('click','.add_radio_item',function(){
      var form_id = $(this).parents('.form-group').attr('id');
+     console.log(form_id);
      var radio_item = '';
          radio_item += '<label class="radio-inline">';
          radio_item += '<input type="radio" name="answer[' + form_id + '][]" disabled>';

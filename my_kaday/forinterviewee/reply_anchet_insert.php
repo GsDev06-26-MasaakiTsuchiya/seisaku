@@ -57,7 +57,7 @@ foreach($questions as $form_num_str=>$question){
 
 }
 
-header("Location: reply_anchet.php");
+header("Location: reply_show.php?anchet_id=$anchet_id");
 exit;
 // }
 

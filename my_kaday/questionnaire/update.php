@@ -18,7 +18,6 @@ var_dump($questions);
 var_dump($form_types);
 var_dump($select_items);
 echo('</pre>');
-// exit();
 
 $pdo = db_con();
 //form table 更新

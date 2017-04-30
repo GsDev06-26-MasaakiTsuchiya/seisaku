@@ -1,3 +1,4 @@
+
 footer.footer_for_interviewee{
   background:#fff;
   height:40px;
@@ -5,8 +6,8 @@ footer.footer_for_interviewee{
 }
 
 footer{
-  background:#000;
-  height:40px;
+background-color: rgba(51,122,183,1);
+  height:50px;
   width:100%;
 }
 .footer_text{
@@ -22,13 +23,14 @@ footer{
 }
 
 html{
-  height:100%;
+  /*height:100%;*/
   font-family:font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
 }
 body{
   background:#f8f8f8;
-  height:100%;
+  /*height:100%;*/
   margin:0;
+  padding-top:70px;
 }
 
 div.radio_item{
@@ -37,4 +39,18 @@ div.radio_item{
 
 .gray{
   color:#aaa;
+}
+.navbar-default {
+background-color: rgba(51,122,183,0.8);
+border-color:;
+
+}
+.navbar-default .navbar-nav > li > a {
+color: #ffffff;
+}
+.navbar-default .navbar-brand {
+color: #ffffff;
+}
+.navbar-right{
+  padding-right:10px;
 }

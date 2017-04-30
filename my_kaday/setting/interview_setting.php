@@ -40,17 +40,14 @@ if($status2==false){
 
 
 
-?>
-
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>interview_setting</title>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/common.css">
+  $html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
+  ?>
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <?php include("../template/head.php") ?>
+  <style>
+  </style>
 </head>
 <body>
 <?php include("../template/nav.php") ?>

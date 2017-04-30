@@ -6,7 +6,9 @@ login_check();
 $pdo = db_con();
 
 //２．データ登録SQL作成 該当の候補者情報の抽出
-$stmt_form = $pdo->prepare("SELECT * FROM form");
+$stmt_form = $pdo->prepare("SELECT * FROM form WHERE life_flg=:life_flg");
+$stmt_form->bindValue(':life_flg', 1, PDO::PARAM_INT);
+
 $status_form = $stmt_form->execute();
 
 $view_form_item = "";
@@ -26,24 +28,18 @@ if($status_form==false){
     $view_form_item .= $result_form["form_description"];
     $view_form_item .= '</td>';
     $view_form_item .= '<td>';
-    $view_form_item .= '<a type="button" href="show.php?form_id='.$result_form["form_id"].'"class="btn btn-sm btn-primary">確認・修正</a> <button class="btn btn-sm btn-danger" disabled>削除</button>';
+    $view_form_item .= '<a type="button" href="show.php?form_id='.$result_form["form_id"].'" class="btn btn-sm btn-primary">確認・修正</a> <a type="button" class="btn btn-sm btn-danger" href="delete.php?form_id='.$result_form["form_id"].'">削除</a>';
     $view_form_item .= '</td>';
     $view_form_item .= '</tr>';
   }
 }
 
+$html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
 ?>
-
-
-<html lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>interview_rader_chart > input</title>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/common.css">
+<?php include("../template/head.php") ?>
 <style>
 .mb-30{
   margin-bottom:30px;
