@@ -6,3 +6,9 @@ job_post_view.phpの下部から応募フォームに遷移できます（job_po
 
 作成された求人情報の一覧は
 apply/index.phpで公開されます。
+
+
+
+☆top 面接調整タスクは１次面接の調整しか考慮されていない。
+
+sendgridjp-php-example-master

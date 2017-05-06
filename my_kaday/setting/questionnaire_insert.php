@@ -27,6 +27,38 @@ if($status_anchet == false){
     $error = $stmt_status_anchet->errorInfo();
     exit("QueryError_status_anchet:".$error[2]);
 }
+$anchet_id = $pdo->lastInsertId();
+
+//ここからメール送信
+include("../sendgrid/sendgrid_send.php");
+
+//送信先名前、メールアドレス抽出
+$stmt_interviewee_mail = $pdo->prepare("SELECT interviewee_name,mail FROM interviewee_info where id=:interviewee_id");
+$stmt_interviewee_mail->bindValue(':interviewee_id',$_SESSION["interviewee_id"], PDO::PARAM_INT);
+$status_interviewee_mail = $stmt_interviewee_mail->execute();
+if($status_interviewee_mail==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_interviewee_mail->errorInfo();
+  exit("ErrorQuery_interviewee_mail:".$error[2]);
+}else{
+  $res_interviewee_mail = $stmt_interviewee_mail->fetch();
+  }
+
+$url_path = path_for_mail();
+$to_s = $res_interviewee_mail["mail"];
+$subject_text = "[smartinterview]○○株式会社よりアンケート送信のお知らせ";
+$text = "";
+// $text .= $anchet_message.;
+$text .= $res_interviewee_mail["interviewee_name"]."様".PHP_EOL;
+$text .= "○○株式会社様よりアンケート回答のご依頼が届いております。".PHP_EOL;
+$text .= "選考をスムーズに行うため、以下URLよりご回答をお願いいたします。".PHP_EOL;
+$text .= "なお、回答期限が ".$deadline."に設定されております。".PHP_EOL;
+$text .= "期限までにご回答のほどよろしくお願いいたします。".PHP_EOL;
+$text .= $url_path.'forinterviewee/reply_anchet.php?anchet_id='.$anchet_id;
+$res_send = send_email_by_sendgrid($to_s,$subject_text,$text);
+
+var_dump($res_send);
+
 
 header("Location: interviewee_select.php");
 exit;

@@ -8,6 +8,7 @@ if(
   !isset($_POST["interviewer_name"]) || $_POST["interviewer_name"]=="" ||
   !isset($_POST["lid"]) || $_POST["lid"]=="" ||
   !isset($_POST["lpw"]) || $_POST["lpw"]=="" ||
+  !isset($_POST["interviewer_mail"]) || $_POST["interviewer_mail"]=="" ||
   !isset($_POST["kanri_flg"]) || $_POST["kanri_flg"]=="" ||
   !isset($_POST["life_flg"]) || $_POST["life_flg"]==""
 ){
@@ -19,6 +20,7 @@ $interviewer_id     = $_GET["id"];
 $interviewer_name   = $_POST["interviewer_name"];
 $lid                = $_POST["lid"];
 $lpw                = $_POST["lpw"];
+$interviewer_mail   = $_POST["interviewer_mail"];
 $kanri_flg          = $_POST["kanri_flg"];
 $life_flg           = $_POST["life_flg"];
 
@@ -60,11 +62,12 @@ $pdo = db_con();
 
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("UPDATE interviewer_info SET interviewer_name=:interviewer_name,lid=:lid,lpw=:lpw,kanri_flg=:kanri_flg,life_flg=:life_flg WHERE id=:id");
+$stmt = $pdo->prepare("UPDATE interviewer_info SET interviewer_name=:interviewer_name,lid=:lid,lpw=:lpw,interviewer_mail=:interviewer_mail,kanri_flg=:kanri_flg,life_flg=:life_flg WHERE id=:id");
 $stmt->bindValue(':id', $interviewer_id, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':interviewer_name', $interviewer_name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':lid', $lid, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':lpw', $lpw, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':interviewer_mail', $interviewer_mail, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':kanri_flg', $kanri_flg, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':life_flg', $life_flg, PDO::PARAM_INT);  //Integer（数値の場合 PDO::PARAM_INT)
 $status_must = $stmt->execute();

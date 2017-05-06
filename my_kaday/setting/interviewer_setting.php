@@ -3,7 +3,7 @@ session_start();
 include("../function/function.php");
 login_check();
 
-?$html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
+$html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,6 +35,12 @@ login_check();
         <label class="control-label col-sm-2" for="lpw">pw</label>
           <div class="col-sm-10">
             <input class="form-control" type="text" name="lpw" value="">
+          </div>
+        </div>
+        <div class="form-group">
+        <label class="control-label col-sm-2" for="interviewer_mail">メールアドレス</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="interviewer_mail" value="">
           </div>
         </div>
         <div class="form-group">

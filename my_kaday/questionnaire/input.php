@@ -168,7 +168,7 @@ $(function(){
      var textarea_original = '';
      textarea_original += '<div class="row">';
      textarea_original += '<div class="col-xs-11">';
-     textarea_original += '<div class="form-group" id=' + form_id + '">';
+     textarea_original += '<div class="form-group" id="' + form_id + '">';
      textarea_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      textarea_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）なぜ弊社の求人に興味をもっていただいたのでしょうか"></textarea>';
      textarea_original += '<label class="control-label" for="answer[' + form_id + '][]">回答欄:</label>';
@@ -194,8 +194,8 @@ $(function(){
      var checkbox_original = '';
      checkbox_original += '<div class="row">';
      checkbox_original += '<div class="col-xs-11">';
-     checkbox_original += '<div class="form-group" id=' + form_id + '">';
-     checkbox_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
+     checkbox_original += '<div class="form-group" id="'+ form_id +'">';
+     checkbox_original += '<label class="control-label" for="questions['+ form_id +']">質問:</label>';
      checkbox_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）あなたの得意な科目はなんですか？複数選択可"></textarea>';
      checkbox_original += '<div class="text-right">';
      checkbox_original += '<span class="add_checkbox_item"><i class="glyphicon glyphicon-plus"></i></span>';
@@ -227,7 +227,7 @@ $(function(){
      var radio_original = '';
      radio_original += '<div class="row">';
      radio_original += '<div class="col-xs-11">';
-     radio_original += '<div class="form-group" id=' + form_id + '">';
+     radio_original += '<div class="form-group" id="' + form_id + '">';
      radio_original += '<label class="control-label" for="questions[' + form_id + ']">質問:</label>';
      radio_original += '<textarea class="form-control" name="questions[' + form_id + ']" placeholder="質問文を入力してください。　　例）あなたの得意な科目はなんですか？複数選択可"></textarea>';
      radio_original += '<div class="text-right">';

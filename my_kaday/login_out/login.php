@@ -107,6 +107,9 @@ padding:15px;
   padding:10px;
   font-size:2.0em;
 }
+#top_button{
+  margin-bottom:40px;
+}
 </style>
 </head>
 <body>
@@ -124,13 +127,13 @@ padding:15px;
 <div class="collapse navbar-collapse target">
   <ul class="nav navbar-nav navbar-left">
         <li class="dropdown">
-					<a href="#interview_item" role="button">特徴</a>
+					<a href="#features" role="button">特徴</a>
 				</li>
         <li class="dropdown">
-          <a href="#info_top" role="button">機能紹介</a>
+          <a href="#functions" role="button">機能紹介</a>
         </li>
         <li class="dropdown">
-          <a href="#reference_material" role="button">料金・プラン</a>
+          <a href="#plice_lists" role="button">料金・プラン</a>
         </li>
         <!-- <li class="dropdown">
           <a href="#company_video" role="button">運営会社</a>
@@ -138,7 +141,7 @@ padding:15px;
   </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="#company_video" role="button">新規登録</a>
+        <a href="create.php" role="button">新規登録</a>
       </li>
       <li class="dropdown">
         <a class="" data-toggle="modal" data-target="#loginModal" role="button">ログイン </a>
@@ -153,12 +156,12 @@ padding:15px;
   <div class="col-sm-8 col-xs-12">
     <h2 id="top_text" class="text-center">面接に関する様々な負担を軽減</h2>
     <p id="top_p_text" class="text-center">ビデオチャット面接やアンケートフォーム機能で企業、応募者両方の負担を減らします。<br>無料からお使いいただけます。</p>
-    <div class="text-center"><a type="button" class="btn btn-lg btn-warning">新規登録</a></div>
+    <div class="text-center" id="top_button"><a type="button" class="btn btn-lg btn-warning" href="create.php">新規登録</a></div>
     <div class="text-center"><img id="top_img" class=".img-rounded" src="./img/interview_img.png" alt=""></div>
   </div>
   <div class="col-sm-2 hidden-xs"></div>
 </div>
-<section class="features">
+<section class="features" id="features">
 <div class="row  features_item_row">
   <div class="col-sm-1"></div>
   <h3 class="col-sm-10 features_title">クラウド採用管理・ウェブ面接システム Smart Interview</h3>
@@ -221,13 +224,13 @@ padding:15px;
   <div class="col-sm-1"></div>
   <div class="col-sm-10">
     <h4 class="text-center">その他採用業務の負担を軽減する機能が盛りだくさん</h4>
-    <div class="text-center"><a type="button" class="btn btn-lg btn-warning">無料登録</a></div>
+    <div class="text-center"><a type="button" class="btn btn-lg btn-warning" href="create.php">新規登録</a></div>
   </div>
 <div class="col-sm-1"></div>
 </div>
 </section>
 
-<section class="functions bg-primary">
+<section class="functions bg-primary" id="functions">
 <div class="row functions_item_row">
   <div class="col-sm-1"></div>
   <h3 class="col-sm-10 features_title">Smart Interview機能紹介</h3>
@@ -294,12 +297,12 @@ padding:15px;
   <div class="row functions_item_row">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
-      <div class="text-center"><a type="button" class="btn btn-lg btn-warning">無料登録</a></div>
+      <div class="text-center"><a type="button" class="btn btn-lg btn-warning" href="create.php">新規登録</a></div>
     </div>
     <div class="col-sm-1"></div>
   </div>
 </section>
-<section class="plice_lists">
+<section class="plice_lists" id="plice_lists">
   <div class="row plice_row">
     <div class="col-sm-1"></div>
       <div class="col-sm-10 features_title">
@@ -332,7 +335,7 @@ padding:15px;
           <div class="col-xs-2"></div>
           </div>
           <div class="text-center">
-            <a href="#" type="button" class="btn btn-warning">新規登録</a>
+            <a type="button" class="btn btn-warning" href="create.php?plan=1">新規登録</a>
           </div>
         </div>
       </div>
@@ -352,7 +355,7 @@ padding:15px;
           <div class="col-xs-2"></div>
           </div>
           <div class="text-center">
-            <a href="#" type="button" class="btn btn-warning">新規登録</a>
+            <a href="create.php?plan=2" type="button" class="btn btn-warning">新規登録</a>
           </div>
         </div>
       </div>
@@ -372,7 +375,7 @@ padding:15px;
           <div class="col-xs-2"></div>
           </div>
           <div class="text-center">
-            <a href="#" type="button" class="btn btn-warning">新規登録</a>
+            <a href="create.php?plan=3" type="button" class="btn btn-warning">新規登録</a>
           </div>
         </div>
       </div>

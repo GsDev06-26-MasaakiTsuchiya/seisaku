@@ -51,6 +51,34 @@ if($status3==false){
   $error3 = $stmt3->errorInfo();
   exit("QueryError:".$error3[2]);
 }
+//ここからメール送信
+//候補者名検索
+
+$stmt_interviewee_name = $pdo->prepare("SELECT interviewee_info.interviewee_name FROM interviewee_info INNER JOIN interview ON interviewee_info.id = interview.interviewee_id where interview.id = :interview_id");
+$stmt_interviewee_name->bindValue(':interview_id',$_SESSION["interview_id"], PDO::PARAM_INT);
+$status_interviewee_name = $stmt_interviewee_name->execute();
+if($status_interviewee_name==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_interviewee_name->errorInfo();
+  exit("ErrorQuery_interviewee_name:".$error[2]);
+}else{
+  $res_interviewee_name = $stmt_interviewee_name->fetch();
+  }
+
+include("../sendgrid/sendgrid_send.php");
+$to_s = kanri_users_mails();
+$url_path = path_for_mail();
+$subject_text = "[smartinterview]".$res_interviewee_name["interviewee_name"]."様より面接時間調整に関する返信が来ています。";
+$text = "";
+// $text .= $anchet_message.;
+$text .= $res_interviewee_name["interviewee_name"]."様より面接時間調整のご連絡が届いております。".PHP_EOL;
+$text .= "以下URLよりにアクセスしていただき、なるべく早めに面接日時の確定をお願いいたします。".PHP_EOL;
+$text .= "確定に時間がかかりますと再調整しなくてはならなくなりますのでご注意ください。".PHP_EOL;
+$text .= $url_path.'setting/interview_confirm01.php?interview_id='.$_SESSION["interview_id"];
+$res_send = send_email_by_sendgrid($to_s,$subject_text,$text);
+
+var_dump($res_send);
+
 
 //リダイレクト
   header("Location: interview_date_time_select04.php");//location: のあとに必ずスペースが入る

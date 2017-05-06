@@ -43,6 +43,19 @@ if($status_question==false){
 
   }
 }
+//回答者の名前をだす
+$stmt_interviewee_name = $pdo->prepare("SELECT interviewee_info.interviewee_name FROM interviewee_info INNER JOIN anchet ON anchet.interviewee_id = interviewee_info.id where anchet.anchet_id=:anchet_id");
+$stmt_interviewee_name->bindValue(':anchet_id',$anchet_id,PDO::PARAM_INT);
+$status_interviewee_name = $stmt_interviewee_name->execute();
+
+//３．データ表示
+if($status_interviewee_name==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_interviewee_name->errorInfo();
+  exit("ErrorQuery_interviewee_name:".$error[2]);
+}else{
+  $res_interviewee_name = $stmt_interviewee_name->fetch();
+}
 
 $html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
 ?>
@@ -63,11 +76,15 @@ $html_title = '無料から使えるクラウド採用管理、面接システ�
 <?php include("../template/nav.php") ?>
 <div class="container">
   <h2 class="text-center" style="margin-bottom:30px;">
-    アンケート返信内容
+    アンケート回答内容
   </h2>
+
   <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-8 text-center">
+      <h4 class="text-center" style="margin-bottom:30px;">
+      回答者:<?=$res_interviewee_name["interviewee_name"] ?>
+      </h3>
       <?= $question_answer_view ?>
     </div>
     <div class="col-sm-2"></div>

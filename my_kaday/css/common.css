@@ -54,3 +54,7 @@ color: #ffffff;
 .navbar-right{
   padding-right:10px;
 }
+/* navbar ハンバーガー三本線 */
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #ffffff;
+}

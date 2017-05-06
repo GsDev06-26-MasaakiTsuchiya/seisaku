@@ -153,6 +153,10 @@ $html_title = '無料から使えるクラウド採用管理、面接システ�
 .add_checkbox_item:hover{
   cursor:pointer;
 }
+.form-group,.btn-group{
+margin-bottom:60px;
+
+}
 </style>
 </head>
 <body>
@@ -167,42 +171,35 @@ $html_title = '無料から使えるクラウド採用管理、面接システ�
   </div>
   <div class="row">
     <div class="col-sm-1"></div>
-    <div class="col-sm-8">
+    <div class="col-sm-10">
       <form class="form-horizontal" method="post" action="update.php?form_id=<?= $form_id ?>">
         <div id="myform">
-          <div class="row">
-            <div class="col-xs-11">
-              <div class="form-group">
-                <label class="control-label" for="form_name">フォーム名</label>
-                <input class="form-control" type="text" name="form_name" value="<?=$res_form_title["form_name"]?>">
+              <div class="row">
+                <div class="col-xs-11">
+                  <div class="form-group">
+                    <label class="control-label" for="form_name">フォーム名</label>
+                    <input class="form-control" type="text" name="form_name" value="<?=$res_form_title["form_name"]?>">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="form_description">フォーム説明文</label>
+                    <textarea class="form-control" name="form_description" placeholder="フォームの説明を入力"><?=$res_form_title["form_description"]?></textarea>
+                  </div>
+                </div>
+                <div class="col-xs-1"></div>
               </div>
-            </div>
-          <div class="col-xs-1"></div>
-          </div>
-          <div class="row">
-            <div class=col-xs-11>
-              <div class="form-group">
-                <label class="control-label" for="form_description">フォーム説明文</label>
-                <textarea class="form-control" name="form_description" placeholder="フォームの説明を入力"><?=$res_form_title["form_description"]?></textarea>
+              <div class="btn-group text-center">
+                <button id="add_textarea" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus-sign"></i> テキスト</button>
+                <button id="add_checkbox" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus-sign"></i> チェックボックス</button>
+                <button id="add_radio" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-plus-sign"></i> ラジオボタン</button>
               </div>
-            </div>
-            <div class="col-xs-1"></div>
-          </div>
           <?= $form_item_view ?>
-        </div>
-        <div class="text-center">
+        <div class="form-group text-center">
           <input type="submit" class="btn btn-info" value="更新">
         </div>
-      </form>
-    </div>
-    <div class="col-sm-2">
-      <ul class="list-unstyled add_buttons">
-      <li><button id="add_textarea" class="btn btn-success btn-block"><i class="glyphicon glyphicon-plus-sign"></i> テキスト</button></li>
-      <li><button id="add_checkbox" class="btn btn-success btn-block"><i class="glyphicon glyphicon-plus-sign"></i> チェックボックス</button></li>
-      <li><button id="add_radio" class="btn btn-success btn-block"><i class="glyphicon glyphicon-plus-sign"></i> ラジオボタン</button></li>
-      </ul>
-    </div>
-    <div class="col-sm-1"></div>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-1"></div>
   </div>
 </div>
 <?php include("../template/footer.html") ?>

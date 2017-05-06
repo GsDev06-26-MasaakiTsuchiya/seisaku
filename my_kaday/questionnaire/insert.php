@@ -18,6 +18,7 @@ $select_items = $_POST["select_items"];
 // var_dump($select_items);
 // echo('</pre>');
 // exit;
+
 $pdo = db_con();
 
 

@@ -70,6 +70,35 @@ if($status3==false){
     exit("QueryError3:".$error[2]);
 }
 
+//ここからメール送信設定
+$stmt_interviewee_info= $pdo->prepare("SELECT interviewee_name,mail FROM interviewee_info where id=:interviewee_id");
+$stmt_interviewee_info->bindValue(':interviewee_id',$_SESSION["interviewee_id"], PDO::PARAM_INT);
+$status_interviewee_info = $stmt_interviewee_info->execute();
+if($status_interviewee_info==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_interviewee_info->errorInfo();
+  exit("ErrorQuery_interviewee_info:".$error[2]);
+}else{
+  $res_interviewee_info = $stmt_interviewee_info->fetch();
+  }
+
+include("../sendgrid/sendgrid_send.php");
+$url_path = path_for_mail();
+$to_s = $toSubmit;
+$subject_text = "[smartinterview]○○株式会社より面接時間調整のお知らせ[web面接]";
+$text = "";
+// $text .= $anchet_message.;
+$text .= $res_interviewee_info["interviewee_name"]."様".PHP_EOL;
+$text .= "○○株式会社様より面接時間調整のご連絡が届いております。".PHP_EOL;
+$text .= "以下URLよりにアクセスしていただき、なるべく早めに面接日時の候補のご確認をお願いいたします。".PHP_EOL;
+$text .= "なお、確認に時間がかかりますと面接時間の候補日時が過ぎてしまうことがありますのでご注意ください。".PHP_EOL;
+$text .= $url_path.'forinterviewee/interview_date_time_select01.php?interview_id='.$interview_id;
+$res_send = send_email_by_sendgrid($to_s,$subject_text,$text);
+
+var_dump($res_send);
+
+
+
 header("Location: interviewee_select.php");//location: のあとに必ずスペースが入る
 exit;
 

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cabin+Condensed&text=SmartInterview">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Cabin+Condensed&text=SmartInterview">
 <script src="https://use.fontawesome.com/16c63c33a4.js"></script>
 <nav class="navbar navbar-default navbar-fixed-top">
 <div class="navbar-header">
@@ -8,7 +8,7 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <a class="navbar-brand" href="#" style="font-family:'Cabin+Condensed',serif;"><i class="fa fa-id-card" aria-hidden="true"></i> Smart Interview</a>
+  <a class="navbar-brand" href="../top/index.php" style="font-family:'Cabin+Condensed',serif;"><i class="fa fa-id-card" aria-hidden="true"></i> Smart Interview</a>
 </div>
 
 <div class="collapse navbar-collapse target">

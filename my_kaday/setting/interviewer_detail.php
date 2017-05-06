@@ -62,6 +62,12 @@ $html_title = '無料から使えるクラウド採用管理、面接システ�
           </div>
         </div>
         <div class="form-group">
+        <label class="control-label col-sm-2" for="interviewer_mail">メールアドレス</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" name="interviewer_mail" value="<?=$res["interviewer_mail"]?>">
+          </div>
+        </div>
+        <div class="form-group">
         <label class="control-label col-sm-2" for="department">部署</label>
           <div class="col-sm-10">
             <input class="form-control" type="text" name="department" value="<?php if($res["department"]){echo $res["department"];} ?>">

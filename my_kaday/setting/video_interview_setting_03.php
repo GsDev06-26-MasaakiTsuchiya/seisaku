@@ -94,9 +94,10 @@ $html_title = '無料から使えるクラウド採用管理、面接システ�
         </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="toSubmit">送信先アドレス</label>
-          <div class="col-sm-10">
-            <input type="text" name="toSubmit_address" value="<?= h($res["mail"])?>">
+          <div class="col-sm-5">
+            <input type="text" class="form-control" name="toSubmit_address" value="<?= h($res["mail"])?>">
           </div>
+          <div class="col-sm-5"></div>
         </div>
         <div class="form-group">
           <label class="control-label col-sm-2" for="mail_text">送信テキスト</label>

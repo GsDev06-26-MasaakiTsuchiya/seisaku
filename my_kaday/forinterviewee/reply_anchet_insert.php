@@ -57,6 +57,32 @@ foreach($questions as $form_num_str=>$question){
 
 }
 
+//メール送信
+$stmt_interviewee_name = $pdo->prepare("SELECT interviewee_info.interviewee_name FROM interviewee_info INNER JOIN anchet ON interviewee_info.id = anchet.interviewee_id where anchet.anchet_id = :anchet_id");
+$stmt_interviewee_name->bindValue(':anchet_id',$anchet_id, PDO::PARAM_INT);
+$status_interviewee_name = $stmt_interviewee_name->execute();
+if($status_interviewee_name==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_interviewee_name->errorInfo();
+  exit("ErrorQuery_interviewee_name:".$error[2]);
+}else{
+  $res_interviewee_name = $stmt_interviewee_name->fetch();
+  }
+
+include("../sendgrid/sendgrid_send.php");
+$url_path = path_for_mail();
+$to_s = kanri_users_mails();
+$subject_text = "[smartinterview]".$res_interviewee_name["interviewee_name"]."様よりアンケート回答のお知らせ";
+$text = "";
+// $text .= $anchet_message.;
+// $text .= $res_interviewee_mail["interviewee_name"]."様".PHP_EOL;
+$text .= $res_interviewee_name["interviewee_name"]."様よりアンケート回答のが届いております。".PHP_EOL;
+$text .= "smartinterviewにログイン後,候補者一覧画面からご確認いただけます。".PHP_EOL;
+$text .= $url_path.'setting/questionnaire_show.php?anchet_id='.$anchet_id;
+$res_send = send_email_by_sendgrid($to_s,$subject_text,$text);
+
+var_dump($res_send);
+
 header("Location: reply_show.php?anchet_id=$anchet_id");
 exit;
 // }

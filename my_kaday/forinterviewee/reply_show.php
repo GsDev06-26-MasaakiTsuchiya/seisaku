@@ -45,7 +45,7 @@ if($status_question==false){
   }
 }
 
-?$html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
+$html_title = '無料から使えるクラウド採用管理、面接システム Smart Interview';
 ?>
 <!DOCTYPE html>
 <html>

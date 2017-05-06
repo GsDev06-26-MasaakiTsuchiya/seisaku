@@ -40,6 +40,11 @@ h3{
           <div class="col-sm-5"><img id="thumbnail" class="img-responsive" src=""></div>
         </div>
         <div class="form-group">
+          <label class="control-label col-sm-2" for="corp_logo_f">会社カラー</label>
+          <div class="col-sm-5"><input id="corp_color" type="color" class="form-control" name="corp_color" ></div>
+          <div class="col-sm-5"></div>
+        </div>
+        <div class="form-group">
           <label class="control-label col-sm-2" for="main_title_text">メインタイトル</label>
           <div class="col-sm-10">
             <textArea id="main_title_text" class="form-control" name="main_title_text" rows="10" cols="80"></textArea>

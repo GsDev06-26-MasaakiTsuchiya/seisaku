@@ -75,14 +75,7 @@ $html_title = '無料から使えるクラウド採用管理、面接システ�
 <head>
 <?php include("../template/head.php") ?>
 <style>
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-body{
-  background:#f8f8f8;
-}
+
 
 .div_vertical-middle{
   /*vertical-align: middle;*/
@@ -104,6 +97,9 @@ label{
 }
 label#inteviewer{
   font-size:1em;
+}
+.submit_btn {
+  margin:40px;
 }
 </style>
 </head>

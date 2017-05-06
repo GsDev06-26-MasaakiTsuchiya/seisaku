@@ -3,11 +3,29 @@ session_start();
 include("../function/function.php");
 login_check();
 $interview_id = $_GET["interview_id"];
-$interviewee_id = $_GET["interviewee_id"];
+// $interviewee_id = $_GET["interviewee_id"];
 
 $pdo = db_con();
 
 //２．データ登録SQL作成
+
+//interviewee_id 検索
+$stmt_interviewee_id = $pdo->prepare("SELECT * FROM interview WHERE id = :interview_id");
+$stmt_interviewee_id->bindValue(':interview_id',$interview_id, PDO::PARAM_INT);
+$status_interviewee_id = $stmt_interviewee_id->execute();
+
+if($status_interviewee_id==false){
+  //execute（SQL実行時にエラーがある場合）
+  $error = $stmt_interviewee_id->errorInfo();
+  exit("ErrorQuery_interviewee_id:".$error[2]);
+}else{
+  $res_interviewee_id= $stmt_interviewee_id->fetch();
+}
+
+$interviewee_id = $res_interviewee_id["interviewee_id"];
+
+
+
 $stmt = $pdo->prepare("SELECT * FROM interviewee_info,interview WHERE interviewee_info.id = :interviewee_id AND interview.id= :interview_id");
 $stmt->bindValue(':interviewee_id',$interviewee_id, PDO::PARAM_INT);
 $stmt->bindValue(':interview_id',$interview_id, PDO::PARAM_INT);
@@ -60,14 +78,6 @@ $html_title = '無料から使えるクラウド採用管理、面接システ�
 <head>
 <?php include("../template/head.php") ?>
 <style>
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-body{
-  background:#f8f8f8;
-}
 
 .div_vertical-middle{
   /*vertical-align: middle;*/
@@ -89,6 +99,10 @@ label{
 }
 label#inteviewer{
   font-size:1em;
+}
+
+.submit_btn {
+  margin:40px;
 }
 </style>
 </head>
